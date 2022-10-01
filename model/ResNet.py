@@ -94,10 +94,10 @@ class Bottleneck(nn.Module):
         return out
 
 
-class ResNet(nn.Module):
+class Resnet(nn.Module):
     def __init__(self, block=Bottleneck, layers=[3, 4, 6, 3], num_classes=1000, zero_init_residual=False,
                  groups=1, width_per_group=64, norm_layer=None):
-        super(ResNet, self).__init__()
+        super(Resnet, self).__init__()
         if norm_layer is None:
             norm_layer = nn.BatchNorm2d
         self._norm_layer = norm_layer
@@ -188,3 +188,18 @@ class ResNet(nn.Module):
             elif isinstance(m, nn.BatchNorm2d):
                 nn.init.constant_(m.weight, 1)
                 nn.init.constant_(m.bias, 0)
+
+def load_model(block=Bottleneck, layers=[3, 4, 6, 3], num_classes=1000, zero_init_residual=False,
+                 groups=1, width_per_group=64, norm_layer=None):
+    
+    model =Resnet(
+        block=block, 
+        layers=layers, 
+        num_classes=num_classes, 
+        zero_init_residual=zero_init_residual,
+        groups=groups, 
+        width_per_group=width_per_group, 
+        norm_layer=norm_layer
+    )
+
+    return model

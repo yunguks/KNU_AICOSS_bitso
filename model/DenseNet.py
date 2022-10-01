@@ -6,7 +6,7 @@ import torch.nn.functional as F
 class _DenseLayer(nn.Module):
     def __init__(
         self, num_input_features, growth_rate, bn_size, drop_rate, memory_efficient= False) -> None:
-        super().__init__()
+        super(_DenseLayer,self).__init__()
         self.norm1 = nn.BatchNorm2d(num_input_features)
         self.relu1 = nn.ReLU(inplace=True)
         self.conv1 = nn.Conv2d(num_input_features, bn_size * growth_rate, kernel_size=1, stride=1, bias=False)
@@ -40,7 +40,7 @@ class _DenseBlock(nn.ModuleDict):
     _version = 2
 
     def __init__(self,num_layers,num_input_features,bn_size,growth_rate,drop_rate,memory_efficient= False,):
-        super().__init__()
+        super(_DenseBlock,self).__init__()
         for i in range(num_layers):
             layer = _DenseLayer(
                 num_input_features + i * growth_rate,
@@ -61,19 +61,19 @@ class _DenseBlock(nn.ModuleDict):
 
 class _Transition(nn.Sequential):
     def __init__(self, num_input_features, num_output_features):
-        super().__init__()
+        super(_Transition,self).__init__()
         self.norm = nn.BatchNorm2d(num_input_features)
         self.relu = nn.ReLU(inplace=True)
         self.conv = nn.Conv2d(num_input_features, num_output_features, kernel_size=1, stride=1, bias=False)
         self.pool = nn.AvgPool2d(kernel_size=2, stride=2)
 
 
-class DenseNet(nn.Module):
+class Densenet(nn.Module):
 
     def __init__(self,growth_rate=32,block_config= (6, 12, 24, 16),
     num_init_features = 64,bn_size = 4,drop_rate = 0,num_classes = 1000,memory_efficient = False):
 
-        super().__init__()
+        super(Densenet,self).__init__()
 
         # First convolution
         self.features = nn.Sequential(
@@ -128,3 +128,17 @@ class DenseNet(nn.Module):
         out = torch.flatten(out, 1)
         out = self.classifier(out)
         return out
+
+
+def load_model(growth_rate=32,block_config= (6, 12, 24, 16),
+    num_init_features = 64,bn_size = 4,drop_rate = 0,num_classes = 1000,memory_efficient = False):
+    
+    model = Densenet(
+        growth_rate=growth_rate,
+        block_config= block_config,
+        num_init_features = num_init_features,
+        bn_size = bn_size,
+        drop_rate = drop_rate,
+        num_classes = num_classes,
+        memory_efficient = memory_efficient)
+    return model
