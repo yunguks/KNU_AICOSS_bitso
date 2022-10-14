@@ -5,6 +5,11 @@
 data/
 Dataset/
 checkpoint/
+yolo7/runs/
+yolo7/scripts/
+yolo7/tools/
+*.pt
+*.pth
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
