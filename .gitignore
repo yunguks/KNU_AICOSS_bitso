@@ -8,6 +8,8 @@ checkpoint/
 yolo7/runs/
 yolo7/scripts/
 yolo7/tools/
+*.jpg
+*.PNG
 *.pt
 *.pth
 ### Python ###
