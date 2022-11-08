@@ -48,6 +48,7 @@ def train(hyp, opt, device, tb_writer=None):
     wdir.mkdir(parents=True, exist_ok=True)  # make dir
     last = wdir / 'last.pt'
     best = wdir / 'best.pt'
+    loss_path = wdir / 'val_obj_loss.pt'
     results_file = save_dir / 'results.txt'
 
     # Save run settings
@@ -201,6 +202,7 @@ def train(hyp, opt, device, tb_writer=None):
 
     # Resume
     start_epoch, best_fitness = 0, 0.0
+    best_obj_loss = 100
     if pretrained:
         # Optimizer
         if ckpt['optimizer'] is not None:
@@ -449,6 +451,12 @@ def train(hyp, opt, device, tb_writer=None):
                 best_fitness = fi
             wandb_logger.end_epoch(best_result=best_fitness == fi)
 
+            # Update best val object loss
+            # results = (0, 0, 0, 0, 0, 0, 0)  # P, R, mAP@.5, mAP@.5-.95, val_loss(box, obj, cls)
+            val_obj_loss = results[5]
+            if best_obj_loss > val_obj_loss:
+                best_obj_loss = val_obj_loss
+
             # Save model
             if (not opt.nosave) or (final_epoch and not opt.evolve):  # if save
                 ckpt = {'epoch': epoch,
@@ -464,6 +472,9 @@ def train(hyp, opt, device, tb_writer=None):
                 torch.save(ckpt, last)
                 if best_fitness == fi:
                     torch.save(ckpt, best)
+
+                if best_obj_loss == val_obj_loss:
+                    torch.save(ckpt, loss_path )
                 if (best_fitness == fi) and (epoch >= 200):
                     torch.save(ckpt, wdir / 'best_{:03d}.pt'.format(epoch))
                 if epoch == 0:
