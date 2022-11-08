@@ -8,10 +8,12 @@ checkpoint/
 yolo7/runs/
 yolo7/scripts/
 yolo7/tools/
+*.JPGE
 *.jpg
 *.PNG
 *.pt
 *.pth
+*.zip
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
