@@ -1,10 +1,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
+nohup.*
 *.csv
 data/
 Dataset/
 checkpoint/
+yolo5/runs
 yolo7/runs/
 yolo7/scripts/
 yolo7/tools/

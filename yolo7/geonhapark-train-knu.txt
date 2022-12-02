@@ -1,0 +1,7 @@
+python3 train.py --weights checkpoint/yolov7-tiny.pt --data "Dataset/knu_tour.yaml" --device 0  --workers 8 --batch-size 4 --img 320 --cfg cfg/training/yolov7-tiny_knu.yaml --name tiny-knu-geonhapark --hyp data/knu_tour_tiny.yaml
+
+weights 지정을 해주어야한다.
+KNU_AICOSS_bitso/yolo7/Dataset
+
+
+python3 train.py --weights checkpoint/yolov7-tiny.pt --data "Dataset/knu_tour.yaml" --device 0  --workers 12 --batch-size 16 --img 320 --cfg cfg/training/yolov7-tiny_knu.yaml --name tiny-knu-geonhapark --hyp data/knu_tour_tiny.yaml
