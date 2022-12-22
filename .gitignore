@@ -1,6 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
-
+yolo7/geonhapark-train-knu.txt
 nohup.*
 *.csv
 data/
