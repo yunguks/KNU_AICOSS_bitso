@@ -10,6 +10,7 @@ yolo5/runs
 yolo7/runs/
 yolo7/scripts/
 yolo7/tools/
+yolo5/geonha_hup_out/
 *.JPGE
 *.jpg
 *.PNG
