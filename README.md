@@ -2,19 +2,16 @@
 
 랜드마크 인증을 위한 yolo 학습
 </br>
-</br>
 
 ## 1. Data
 - 라벨링 툴
     - [CVAT](https://github.com/opencv/cvat)
     - [Yolo_Label](https://github.com/developer0hye/Yolo_Label)
-
 <br/>
 
 ## 2. Model
 - yolov5s    
     models/custom_yolov5s.yaml 파일 num_class 변경
-
 <br/>
 
 ## 3. Train
