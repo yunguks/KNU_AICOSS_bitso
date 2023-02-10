@@ -70,5 +70,5 @@ python3 train.py --weights [using yolov5s] --cfg models/y5s_model.yaml --data [c
 ## 4. Convert
 Tensorflow Lite 모델로 변환
 ```
-python3 export.py --weights [weights] --img 416 --half --iou-thres 0.6 --conf-thres 0.1
+python3 export.py --weights [weights] --img 416 --half --iou-thres 0.2 --conf-thres 0.5
 ```
